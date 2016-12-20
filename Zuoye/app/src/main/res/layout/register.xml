@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:padding="20dp"
+    android:background="#cccccc"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textColor="#00B2EE"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="60sp"/>
+    <EditText
+        android:id="@+id/regi_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:textSize="20sp"
+        android:hint="请输入用户名"
+        android:drawableLeft="@mipmap/user_72"
+        android:drawablePadding="10dp"
+        android:singleLine="true"
+        />
+    <EditText
+        android:id="@+id/regi_pwd"
+        android:inputType="textPassword"
+        android:hint="请输入密码"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/regi_user"
+        android:drawableLeft="@mipmap/pwd_72"
+        android:drawablePadding="10dp"
+        android:singleLine="true"
+        />
+
+    <Button
+        android:id="@+id/login_view"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:textSize="16sp"
+        android:padding="0dp"
+        android:layout_margin="0dp"
+        android:text="登录"
+        android:background="@android:color/transparent"/>
+<!--android:onClick="regi_click"-->
+    <Button
+        android:id="@+id/regi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注  册"
+
+        android:layout_marginTop="28dp"
+        android:textSize="25sp"
+        android:textColor="#fff"
+        android:background="@drawable/bt"
+        android:layout_below="@+id/regi_pwd"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
