@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import static java.lang.Thread.sleep;
 
-public class MainActivity extends AppCompatActivity {
+public class Regi extends AppCompatActivity {
 
     private Button bt_regi,bt_login;
     private EditText user,pwd;
@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
                 String strUser = user.getText().toString();
                 String strPwd = pwd.getText().toString();
                 if(strUser.length()<6){
-                    Toast.makeText(MainActivity.this, "用户名位数不够", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Regi.this, "用户名位数不够", Toast.LENGTH_SHORT).show();
                 }else
                     ii++;
                 if(strPwd.length()<6){
-                    Toast.makeText(MainActivity.this, "密码位数不够", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Regi.this, "密码位数不够", Toast.LENGTH_SHORT).show();
 
                 }else
                     ii++;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("user",strUser);
                     editor.putString("pwd",strPwd);
                     editor.commit();
-                    Toast.makeText(MainActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Regi.this, "注册成功", Toast.LENGTH_SHORT).show();
                     regi_click(strUser);
                 }
             }
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void regi_click(String name){
 
-        Intent intent = new Intent(MainActivity.this,Login.class);
+        Intent intent = new Intent(Regi.this,Login.class);
         Bundle userPwd = new Bundle();
         userPwd.putString("login_name",name);
         intent.putExtras(userPwd);

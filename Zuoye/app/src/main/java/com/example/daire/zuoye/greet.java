@@ -21,9 +21,12 @@ public class greet extends Activity {
     }
     void show(){
         Bundle bunText = getIntent().getExtras();
-        String str = bunText.getString("user");
-        String text1=title.getText().toString();
-        title.setText(text1+str+"用户");
+        if (bunText != null) {
+            String str = bunText.getString("user");
+            String text1=title.getText().toString();
+            title.setText(text1+str+"用户");
+        }
+
 //        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 }
