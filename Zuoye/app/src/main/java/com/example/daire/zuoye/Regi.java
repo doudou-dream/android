@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * 注册界面
+ */
 public class Regi extends AppCompatActivity {
 
     private Button bt_regi,bt_login;
@@ -21,30 +24,38 @@ public class Regi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        //注册
         bt_regi = (Button) findViewById(R.id.regi);
+        //登录按钮切换
         bt_login = (Button) findViewById(R.id.login_view);
         user = (EditText) findViewById(R.id.regi_user);
         pwd = (EditText) findViewById(R.id.regi_pwd);
         sharedPreferences = getSharedPreferences("Login",MODE_APPEND);
         editor = sharedPreferences.edit();
+        //注册
         bt_regi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int ii=0;
                 String strUser = user.getText().toString();
                 String strPwd = pwd.getText().toString();
-                if(strUser.length()<6){
-                    Toast.makeText(Regi.this, "用户名位数不够", Toast.LENGTH_SHORT).show();
+                if(strUser.length()<6 || strUser.length()>20){
+                    Toast.makeText(Regi.this, "用户名位数不对，6-20", Toast.LENGTH_SHORT).show();
                 }else
                     ii++;
-                if(strPwd.length()<6){
-                    Toast.makeText(Regi.this, "密码位数不够", Toast.LENGTH_SHORT).show();
+                if(strPwd.length()<6 || strPwd.length()>20){
+                    Toast.makeText(Regi.this, "密码位数不对，6-20", Toast.LENGTH_SHORT).show();
 
                 }else
                     ii++;
-                if(ii==2){
-                    editor.putString("user",strUser);
-                    editor.putString("pwd",strPwd);
+                String str1 = sharedPreferences.getString("user"+strUser,null);
+                if(str1 != null){
+                    Toast.makeText(Regi.this, "已经注册过了", Toast.LENGTH_SHORT).show();
+                }else 
+                    ii++;
+                if(ii==3){
+                    editor.putString("user"+strUser,strUser);
+                    editor.putString("pwd"+strUser,strPwd);
                     editor.commit();
                     Toast.makeText(Regi.this, "注册成功", Toast.LENGTH_SHORT).show();
                     regi_click(strUser);
@@ -58,9 +69,8 @@ public class Regi extends AppCompatActivity {
             }
         });
     }
-
+    //数据跳转
     private void regi_click(String name){
-
         Intent intent = new Intent(Regi.this,Login.class);
         Bundle userPwd = new Bundle();
         userPwd.putString("login_name",name);
