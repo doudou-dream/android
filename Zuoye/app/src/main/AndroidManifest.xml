@@ -4,11 +4,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/qq01"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Login">
+        <activity android:name=".cc">
             <!--android:theme="@android:style/Theme.NoTitleBar"-->
 
             <intent-filter>
@@ -16,6 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".Login"></activity>
         <activity android:name=".Regi"></activity>
         <activity android:name=".greet"></activity>
     </application>

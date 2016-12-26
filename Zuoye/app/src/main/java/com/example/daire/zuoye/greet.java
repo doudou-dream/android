@@ -26,7 +26,5 @@ public class greet extends Activity {
             String text1=title.getText().toString();
             title.setText(text1+str+"用户");
         }
-
-//        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 }

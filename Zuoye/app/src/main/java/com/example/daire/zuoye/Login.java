@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,6 +31,10 @@ public class Login extends Activity {
     private String strPwd;
     //接受注册界面里的数据
     private String str=null;
+    //存储上一次登录的账号
+    String user_che;
+    //退出判断
+    private boolean isExit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +62,10 @@ public class Login extends Activity {
                     if(checkBox.isChecked()) {
                         editor.putString("check", strUser);
                         editor.commit();
-                        Toast.makeText(Login.this, sharedPreferences.getString("check",null), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Login.this, sharedPreferences.getString("check",null), Toast.LENGTH_SHORT).show();
                     }else{
                         editor.putString("check", null);
+                        editor.putString("ssUser", strUser);
                         editor.commit();
                     }
                     greet_intent(spUser);
@@ -87,6 +95,8 @@ public class Login extends Activity {
         bt_regi = (Button) findViewById(R.id.regi_view);
         //存储是否记住密码的判断
         checkEdi = sharedPreferences.getString("check",null);
+        //存储上一次登录的账号
+        user_che = sharedPreferences.getString("ssUser",null);
 
     }
     //接受传过来的数据，如果第二个页面结束了数据就没了
@@ -110,13 +120,14 @@ public class Login extends Activity {
     //是否勾选记住密码判断
     private void checke(){
         inUsertt(checkEdi);
+//        Toast.makeText(this, checkEdi, Toast.LENGTH_SHORT).show();
         if(checkEdi != null){
             user.setText(spUser);
             pwd.setText(spPwd);
             checkBox.setChecked(true);
         }else{
-            user.setText(spUser);
-            Toast.makeText(this, "没有选中", Toast.LENGTH_SHORT).show();
+            user.setText(user_che);
+//            Toast.makeText(this, spUser, Toast.LENGTH_SHORT).show();
         }
     }
     //读取文件内容
@@ -126,4 +137,27 @@ public class Login extends Activity {
         spUser = sharedPreferences.getString("user"+usertt,"");
         spPwd = sharedPreferences.getString("pwd"+usertt,"");
     }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            if (!isExit){
+                isExit = true;
+                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                mHandler.sendEmptyMessageDelayed(0,2000);
+            }else{
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
+                System.exit(0);
+            }
+            return false;
+        }else
+            return super.onKeyDown(keyCode, event);
+    }
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isExit = false;
+        }
+    };
 }
